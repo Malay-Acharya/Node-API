@@ -12,6 +12,24 @@ const server = http.createServer((req,res)=>{
             res.end()
         })
     }
+    else if(req.url === "/create-file"){
+        res.writeHead(200, {"Content-Type":"text/html"});
+        const data = "<h1>Test data updated</h1>"
+        fs.writeFile("temp/test.html", data, (err, data) =>{
+            if (err) throw err;
+            res.write("File created")
+            res.end()
+        })
+    }
+    else if(req.url === "/append-file"){
+        res.writeHead(200, {"Content-Type":"text/html"});
+        const data = "<h1>Test data updated</h1>"
+        fs.appendFile("temp/test.html", data, (err, data) =>{
+            if (err) throw err;
+            res.write("File Appended")
+            res.end()
+        })
+    }
     else if(req.url === "/about"){
         res.writeHead(200, {"Content-Type":"text/html"});
         fs.readFile("pages/about.html", "utf8", (err, data) =>{
