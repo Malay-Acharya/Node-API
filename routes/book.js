@@ -1,14 +1,29 @@
 const express = require("express");
-const bookrouter = express.Router()
+const bookrouter = express.Router();
+const connect = require("../database/db")
 
-bookrouter.route('/book').
-post((req,res) =>{
+bookrouter.route('/book')
+.get(async (req,res) =>{
+    const db = await connect();
+    const books = await db.collection('book').find().toArray();
+    res.json(books)
+}).
+post(async (req,res) =>{  
+    const db = await connect();
+    const data = {
+        title:"title",
+        author: "author"
+    }
+    await db.collection('book').insertOne(data);
     res.json({data: "Book is stored"})
-}).get((req,res) =>{
-    res.send("All books")
 })
 
-bookrouter.get("/book/:id", (req,res)=>{
+bookrouter.route("/book/:id")
+.get((req,res)=>{
+    res.send(`single book of id : ${req.params.id}`)
+}).patch((req,res)=>{
+    res.send(`single book of id : ${req.params.id}`)
+}).delete((req,res)=>{
     res.send(`single book of id : ${req.params.id}`)
 })
 
