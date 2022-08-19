@@ -10,11 +10,7 @@ bookrouter.route('/book')
 }).
 post(async (req,res) =>{  
     const db = await connect();
-    const data = {
-        title:"title",
-        author: "author"
-    }
-    await db.collection('book').insertOne(data);
+    await db.collection('book').insertOne(req.body);
     res.json({data: "Book is stored"})
 })
 
