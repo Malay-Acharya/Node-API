@@ -4,6 +4,7 @@ const routes = require("./routes/index")
 const app = express();
 
 app.use(routes);
+app.set('view engine', 'pug')
 
 const PORT = 3000;
 

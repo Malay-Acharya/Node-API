@@ -5,7 +5,7 @@ const path = require("path")
 
 
 router.get('/', (req,res) =>{
-    res.sendFile(path.join(__dirname, "../pages/home.html"))
+    res.render("home", {name: "malay"})
 })
 
 router.use(bookrouter)
