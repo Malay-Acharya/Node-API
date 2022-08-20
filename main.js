@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = require("./routes/index")
 const bodyParser = require("body-parser");
+const connect = require("./database/db")
 
 const app = express();
 
@@ -10,6 +11,6 @@ app.set('view engine', 'pug')
 
 const PORT = 3000;
 
-app.listen(PORT, () =>{
+connect.then(()=>{app.listen(PORT, () =>{
     console.log(`Server is running at ${PORT}`);
-})
+})});
